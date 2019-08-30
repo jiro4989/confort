@@ -1,0 +1,28 @@
+= confort
+
+設定ファイルに値を埋め込むの、もっと簡単に書きたい。
+
+== Overview
+
+bashrcに環境変数を定義するだとか
+httpd.confに設定を定義するだとか
+config.jsonに設定を定義するだとか
+そういうのの書式の違いって、本質じゃないと思うんです。
+
+本当にやりたいことって、キーとバリューのセットで設定値を書くことであって
+書式の違いに苦労することって本質ではないと思うんです。
+
+このコマンドは、そんなそれぞれ異なる設定ファイルの書式の違いを吸収して
+共通するインタフェースで設定を追記、上書き、挿入することを目的とします。
+
+== Usage
+
+[source,bash]
+----
+confort add .bashrc GOPATH '$HOME/go'
+confort add --dry-run .bashrc GOPATH '$HOME/go'
+confort add httpd.conf Listen 1234
+confort disable httpd.conf Listen 80
+confort remove httpd.conf Listen 80
+confort update httpd.conf Files.Deny 'from all'
+----
